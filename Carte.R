@@ -8,7 +8,7 @@ df <- read.csv("vessel-total-clean-final.csv", stringsAsFactors = FALSE)
 pts <- st_as_sf(df, coords = c("lon","lat"), crs = 4326)
 
 # 3) Définition d’un bbox « agrandi » de ±2° autour du Golfe
-xmin0 <- -98; xmax0 <- -78; ymin0 <- 18; ymax0 <- 30
+xmin0 <- -98; xmax0 <- -79; ymin0 <- 18; ymax0 <- 30
 marge  <- 2
 golfe_bbox <- st_as_sfc(
   st_bbox(c(xmin = xmin0 - marge,
