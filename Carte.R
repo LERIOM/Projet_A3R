@@ -1,0 +1,1 @@
+file<-read.csv("DossierdedonnéesBigDataNantes.csv") 

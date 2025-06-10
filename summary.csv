@@ -1,0 +1,109 @@
+valeur.Var1,valeur.Var2,valeur.Freq
+,      id,Min.   :      82  
+,      id,1st Qu.: 7899115  
+,      id,Median :16523442  
+,      id,Mean   :16829900  
+,      id,3rd Qu.:25793408  
+,      id,Max.   :35186323  
+,     MMSI,Min.   :205776000  
+,     MMSI,1st Qu.:367037610  
+,     MMSI,Median :367640910  
+,     MMSI,Mean   :404678555  
+,     MMSI,3rd Qu.:374158000  
+,     MMSI,Max.   :671830000  
+,BaseDateTime,Length:420217     
+,BaseDateTime,Class :character  
+,BaseDateTime,Mode  :character  
+,BaseDateTime,NA
+,BaseDateTime,NA
+,BaseDateTime,NA
+,     LAT,Min.   :23.39  
+,     LAT,1st Qu.:27.91  
+,     LAT,Median :29.28  
+,     LAT,Mean   :28.72  
+,     LAT,3rd Qu.:29.73  
+,     LAT,Max.   :36.69  
+,     LON,Min.   :-118.19  
+,     LON,1st Qu.: -94.43  
+,     LON,Median : -90.21  
+,     LON,Mean   : -90.09  
+,     LON,3rd Qu.: -89.07  
+,     LON,Max.   : -75.00  
+,     SOG,Min.   :  0.000  
+,     SOG,1st Qu.:  0.000  
+,     SOG,Median :  0.000  
+,     SOG,Mean   :  4.534  
+,     SOG,3rd Qu.:  6.800  
+,     SOG,Max.   :102.300  
+,     COG,Min.   :  0.0  
+,     COG,1st Qu.:127.6  
+,     COG,Median :228.2  
+,     COG,Mean   :211.6  
+,     COG,3rd Qu.:302.3  
+,     COG,Max.   :360.0  
+,   Heading,Min.   :  0.0  
+,   Heading,1st Qu.:127.0  
+,   Heading,Median :301.0  
+,   Heading,Mean   :300.7  
+,   Heading,3rd Qu.:511.0  
+,   Heading,Max.   :511.0  
+, VesselName,Length:420217     
+, VesselName,Class :character  
+, VesselName,Mode  :character  
+, VesselName,NA
+, VesselName,NA
+, VesselName,NA
+,    IMO,Length:420217     
+,    IMO,Class :character  
+,    IMO,Mode  :character  
+,    IMO,NA
+,    IMO,NA
+,    IMO,NA
+,  CallSign,Length:420217     
+,  CallSign,Class :character  
+,  CallSign,Mode  :character  
+,  CallSign,NA
+,  CallSign,NA
+,  CallSign,NA
+,  VesselType,Min.   :60.0  
+,  VesselType,1st Qu.:60.0  
+,  VesselType,Median :70.0  
+,  VesselType,Mean   :68.6  
+,  VesselType,3rd Qu.:80.0  
+,  VesselType,Max.   :89.0  
+,   Status,Length:420217     
+,   Status,Class :character  
+,   Status,Mode  :character  
+,   Status,NA
+,   Status,NA
+,   Status,NA
+,   Length,Length:420217     
+,   Length,Class :character  
+,   Length,Mode  :character  
+,   Length,NA
+,   Length,NA
+,   Length,NA
+,   Width,Length:420217     
+,   Width,Class :character  
+,   Width,Mode  :character  
+,   Width,NA
+,   Width,NA
+,   Width,NA
+,   Draft,Length:420217     
+,   Draft,Class :character  
+,   Draft,Mode  :character  
+,   Draft,NA
+,   Draft,NA
+,   Draft,NA
+,   Cargo,Length:420217     
+,   Cargo,Class :character  
+,   Cargo,Mode  :character  
+,   Cargo,NA
+,   Cargo,NA
+,   Cargo,NA
+,TransceiverClass,Length:420217     
+,TransceiverClass,Class :character  
+,TransceiverClass,Mode  :character  
+,TransceiverClass,NA
+,TransceiverClass,NA
+,TransceiverClass,NA
