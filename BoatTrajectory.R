@@ -6,7 +6,7 @@ library(rnaturalearthdata)
 
 # 1) Lecture brute et filtrage sur MMSI = 67895
 df <- read.csv("vessel-total-clean-final.csv", stringsAsFactors = FALSE) %>%
-  filter(mmsi == 3677037610)    # ou, si vos noms de colonnes sont passés en minuscules : filter(mmsi == 67895)
+  filter(mmsi == 368063310)    # ou, si vos noms de colonnes sont passés en minuscules : filter(mmsi == 67895)
 
 # 2) Conversion en sf
 pts <- st_as_sf(df, coords = c("lon","lat"), crs = 4326)

@@ -1,5 +1,7 @@
+library(ggplot2)
 library(sf)
-library(dplyr)
+library(rnaturalearth)
+library(viridis)
 
 # 1) Lecture brute
 df <- read.csv("vessel-total-clean-final.csv", stringsAsFactors = FALSE)
