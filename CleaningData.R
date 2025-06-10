@@ -1,10 +1,6 @@
 file<-read.csv("DossierdedonnéesBigDataNantes.csv") 
 
 
-
- 
-
-
 summary(file)
 str(file)
 head(file)
@@ -98,3 +94,4 @@ hist(df$vessel_type,
      col = "skyblue",
      border = 'white',
      breaks = 50)
+
