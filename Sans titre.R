@@ -1,4 +1,11 @@
-summary(vessel.total.clean)
-str(vessel.total.clean)
-head(vessel.total.clean)
+file<-read.csv("DossierdedonnéesBigDataNantes.csv") 
+
+
+
+ 
+
+
+summary(file)
+str(file)
+head(file)
 
