@@ -64,6 +64,14 @@ mean_drafts <- aggregate(draft ~ vessel_type, data = df, FUN = function(x) mean(
 df$draft <- ifelse(is.na(df$draft), 
                    mean_drafts$draft[match(df$vessel_type, mean_drafts$vessel_type)], 
                    df$draft)
+mean_length <- aggregate(length ~ vessel_type, data = df, FUN = function(x) mean(x, na.rm = TRUE))
+df$length <- ifelse(is.na(df$length), 
+                   mean_length$length[match(df$vessel_type, mean_length$vessel_type)], 
+                   df$length)
+mean_width <- aggregate(width ~ vessel_type, data = df, FUN = function(x) mean(x, na.rm = TRUE))
+df$width <- ifelse(is.na(df$width), 
+                   mean_width$width[match(df$vessel_type, mean_width$vessel_type)], 
+                   df$width)
 # 5. Identifier les lignes avec valeurs manquantes
 missing_summary <- df |> summarise(across(everything(), ~sum(is.na(.))))
 
