@@ -54,10 +54,16 @@ df <- df |>
     lon >= -98 & lon <= -78,
     sog <= 30,
     cog <= 360.0,
-    heading <= 360,
+    heading <= 359.0,
     )
-df <- subset(df, !(length == 0 | width == 0) | is.na(length) | is.na(width))
+df <- subset(df, !(vessel_type == 60 & (is.na(cargo)|cargo ==0 | cargo == 99)))
+df <- subset(df, !(vessel_type == 80 & (is.na(cargo))))
+df <- subset(df, !(length <= 10 | width <= 3 | draft <= 0.5) | is.na(draft) | is.na(length) | is.na(width))
 
+mean_drafts <- aggregate(draft ~ vessel_type, data = df, FUN = function(x) mean(x, na.rm = TRUE))
+df$draft <- ifelse(is.na(df$draft), 
+                   mean_drafts$draft[match(df$vessel_type, mean_drafts$vessel_type)], 
+                   df$draft)
 # 5. Identifier les lignes avec valeurs manquantes
 missing_summary <- df |> summarise(across(everything(), ~sum(is.na(.))))
 
