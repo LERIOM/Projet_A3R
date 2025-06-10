@@ -1,11 +1,11 @@
 file<-read.csv("DossierdedonnéesBigDataNantes.csv") 
 
+
+
 summary(file)
 str(file)
 head(file)
-summary(vessel.total.clean)
-str(vessel.total.clean)
-head(vessel.total.clean)
+
 
 install.packages("readr")
 install.packages("dplyr")
@@ -50,5 +50,12 @@ df <- df |>
 
 # 7. Exporter la base propre
 write_csv(df, "vessel-total-clean-final.csv")
+
+hist(df$sog,
+     main = "Histogramme des vitesses des bateaux",
+     xlab = "Vitesse (sog)",
+     col = "skyblue",
+     border = "white",
+     breaks = 50)
 
 
