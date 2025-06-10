@@ -13,6 +13,7 @@ install.packages("readr")
 install.packages("dplyr")
 install.packages("tidyr")
 install.packages("stringr")
+install.packages("janitor")
 
 library(dplyr)
 library(tidyr)
@@ -21,7 +22,7 @@ library(janitor)
 library(readr)
 
 # 1. Charger les données
-df <- vessel.total.clean
+df <- file
 # 2. Nettoyer les noms de colonnes
 df <- df |> clean_names()
 
