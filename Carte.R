@@ -1,3 +1,8 @@
+install.packages("ggplot2")
+install.packages("sf")
+install.packages("rnaturalearth")
+install.packages("viridis")
+install.packages("dplyr")
 library(ggplot2)
 library(sf)
 library(rnaturalearth)
