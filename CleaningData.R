@@ -58,4 +58,10 @@ hist(df$sog,
      border = "white",
      breaks = 50)
 
+hist(df$vessel_type,
+     main = "Graphique des bateaux en fonction de leurs types",
+     xlab = "Type des bateaux (vessel_type)",
+     col = "skyblue",
+     border = 'white',
+     breaks = 50)
 
