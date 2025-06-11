@@ -54,4 +54,10 @@ ggplot() +
   geom_sf(data = ports_wgs84, color = "red", size = 2) +
   coord_sf(xlim = c(-100, -75), ylim = c(18, 32), expand = FALSE) +
   scale_color_viridis_d(option = "turbo", guide = "none") +
-  theme_minimal()
+  theme_minimal()+
+  theme(
+    axis.text      = element_blank(),  # supprime les étiquettes (–95°, 18°…)
+    axis.ticks     = element_blank(),  # supprime les graduations
+    axis.title     = element_blank(),  # supprime les titres d’axe
+    axis.line      = element_blank()   # supprime les lignes d’axe
+  )
