@@ -48,3 +48,4 @@ ggplot() +
   ) +
   theme_void() +
   theme(panel.background = element_rect(fill = "lightblue"))
+

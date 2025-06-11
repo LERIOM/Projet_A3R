@@ -20,7 +20,7 @@ library(readr)
 
 # Charge les données
 
-df <- vessel.total.clean
+df <- Dossier.de.données.Big.Data.Nantes
 # Liste des valeurs à convertir en NA
 valeurs_na <- c("", "NA", "\\N", "na", "n")
 
@@ -96,4 +96,5 @@ hist(df$vessel_type,
      col = "skyblue",
      border = 'white',
      breaks = 50)
+
 
