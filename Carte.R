@@ -1,15 +1,14 @@
 install.packages("ggplot2")
 install.packages("sf")
 install.packages("rnaturalearth")
-install.packages("rnaturalearthdata")
 install.packages("viridis")
 install.packages("dplyr")
 library(ggplot2)
 library(sf)
 library(rnaturalearth)
+library(rnaturalearthdata)
 library(viridis)
 library(dplyr)
-
 
 # 1) Lecture brute
 df <- read.csv("vessel-total-clean-final.csv", stringsAsFactors = FALSE)
@@ -48,4 +47,3 @@ ggplot() +
   ) +
   theme_void() +
   theme(panel.background = element_rect(fill = "lightblue"))
-
