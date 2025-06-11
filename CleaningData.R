@@ -18,12 +18,13 @@ library(stringr)
 library(janitor)
 library(readr)
 
-# 1. Charger les données
+# Charge les données
+
 df <- vessel.total.clean
 # Liste des valeurs à convertir en NA
 valeurs_na <- c("", "NA", "\\N", "na", "n")
 
-# Appliquer le remplacement sur toutes les colonnes de type caractère ou facteur
+# Applique le remplacement sur toutes les colonnes de type caractère ou facteur
 df <- as.data.frame(lapply(df, function(col) {
   if (is.character(col) || is.factor(col)) {
     col[col %in% valeurs_na] <- NA
@@ -31,10 +32,10 @@ df <- as.data.frame(lapply(df, function(col) {
   return(col)
 }))
 
-# 2. Nettoyer les noms de colonnes
+# Nettoie les noms de colonnes
 df <- df |> clean_names()
 
-# 3. Convertir les colonnes numériques (length, width, draft) de caractères → num
+# 3. Convertit les colonnes numériques (length, width, draft) de caractères → num
 df <- df |>
   mutate(
     length = as.numeric(length),
@@ -42,22 +43,22 @@ df <- df |>
     draft = as.numeric(draft)
   )
 
-# 4. Supprimer les doublons (identiques sur toutes les colonnes)
+# Supprime les doublons (identiques sur toutes les colonnes)
 df <- df |> distinct()
 
 
 
-# 6. Supprimer les valeurs aberrantes (exemples simples)
+# Supprime les valeurs aberrantes (exemples simples)
 df <- df |> 
   filter(
     lat >= 20 & lat <= 30,
     lon >= -98 & lon <= -78,
     sog <= 30,
-    cog <= 360.0,
-    heading <= 359.0,
     )
-df <- subset(df, !(vessel_type == 60 & (is.na(cargo)|cargo ==0 | cargo == 99)))
-df <- subset(df, !(vessel_type == 80 & (is.na(cargo))))
+df$cog[df$sog == 0] <- 0
+df$cog[df$cog >= 360] <- NA
+df$heading[df$heading >= 360] <- NA
+df$cargo[df$vessel_type == 60 & (df$cargo == 0 | df$cargo == 99)] <- NA
 df <- subset(df, !(length <= 10 | width <= 3 | draft <= 0.5) | is.na(draft) | is.na(length) | is.na(width))
 
 mean_drafts <- aggregate(draft ~ vessel_type, data = df, FUN = function(x) mean(x, na.rm = TRUE))
@@ -72,16 +73,17 @@ mean_width <- aggregate(width ~ vessel_type, data = df, FUN = function(x) mean(x
 df$width <- ifelse(is.na(df$width), 
                    mean_width$width[match(df$vessel_type, mean_width$vessel_type)], 
                    df$width)
-# 5. Identifier les lignes avec valeurs manquantes
+# Identifie les lignes avec valeurs manquantes
 missing_summary <- df |> summarise(across(everything(), ~sum(is.na(.))))
 
-# 7. Exporter la base propre
+# Exporte la base propre
 write_csv(df, "vessel-total-clean-final.csv")
 
 sum <- summary(vessel.total.clean)
 summary_df <- data.frame(valeur = sum)
 write_csv(summary_df, "summary.csv")
 
+# Crée les histogrammes
 hist(df$sog,
      main = "Histogramme des vitesses des bateaux",
      xlab = "Vitesse (sog)",

@@ -1,3 +1,4 @@
+install.packages("scales")
 install.packages("ggplot2")
 install.packages("sf")
 install.packages("rnaturalearth")
