@@ -1,3 +1,4 @@
+
 install.packages("scales")
 install.packages("ggplot2")
 install.packages("sf")
@@ -39,12 +40,20 @@ cat("Points gardés     :", nrow(pts_golfe), "\n")
 
 # 6) Tracé simple pour vérifier le cadre
 ggplot() +
-  geom_sf(data = coast_golfe, fill = "grey30", color = "grey60") +
-  geom_sf(data = pts_golfe,  colour = "red",    size  = 0.5) +
+  geom_sf(data = world, fill = "grey90", color = "grey50") +
+  geom_sf(
+    data    = pts_golfe,
+    mapping = aes(color = factor(vessel_type)),
+    size    = 0.5
+  ) +
+  scale_color_viridis_d(
+    name      = "VesselType",
+    option    = "D",      # ou "C", "E", selon la palette
+    direction = 1
+  ) +
   coord_sf(
     xlim   = c(xmin0 - marge, xmax0 + marge),
     ylim   = c(ymin0 - marge, ymax0 + marge),
     expand = FALSE
   ) +
-  theme_void() +
-  theme(panel.background = element_rect(fill = "lightblue"))
+  theme_void() 
