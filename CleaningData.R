@@ -63,24 +63,34 @@ df <- df |>
     lon >= -98 & lon <= -78,
     sog <= 30,
     )
+
+# Met l'angle à 0 si la vitesse est nulle
 df$cog[df$sog == 0] <- 0
+
+# Met l'angle à NA s'il est supérieur à 360
 df$cog[df$cog >= 360] <- NA
 df$heading[df$heading >= 360] <- NA
+
 df$cargo[df$vessel_type == 60 & (df$cargo == 0 | df$cargo == 99)] <- NA
+
 df <- subset(df, !(length <= 10 | width <= 3 | draft <= 0.5) | is.na(draft) | is.na(length) | is.na(width))
 
+# Remplace les valeurs Na par la moyenne correspondante par type 
 mean_drafts <- aggregate(draft ~ vessel_type, data = df, FUN = function(x) mean(x, na.rm = TRUE))
 df$draft <- ifelse(is.na(df$draft), 
                    mean_drafts$draft[match(df$vessel_type, mean_drafts$vessel_type)], 
                    df$draft)
+
 mean_length <- aggregate(length ~ vessel_type, data = df, FUN = function(x) mean(x, na.rm = TRUE))
 df$length <- ifelse(is.na(df$length), 
                    mean_length$length[match(df$vessel_type, mean_length$vessel_type)], 
                    df$length)
+
 mean_width <- aggregate(width ~ vessel_type, data = df, FUN = function(x) mean(x, na.rm = TRUE))
 df$width <- ifelse(is.na(df$width), 
                    mean_width$width[match(df$vessel_type, mean_width$vessel_type)], 
                    df$width)
+
 # Identifie les lignes avec valeurs manquantes
 missing_summary <- df |> summarise(across(everything(), ~sum(is.na(.))))
 
