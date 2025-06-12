@@ -5,15 +5,22 @@ summary(file)
 str(file)
 head(file)
 
+<<<<<<< HEAD
 install.packages("nnet")
+=======
+
+>>>>>>> b5d5542b2d6f621ac56d0cb5abc032720f7c67f1
 install.packages("readr")
 install.packages("dplyr")
 install.packages("tidyr")
 install.packages("stringr")
 install.packages("janitor")
 
+<<<<<<< HEAD
 library(nnet)
 library(corrplot)
+=======
+>>>>>>> b5d5542b2d6f621ac56d0cb5abc032720f7c67f1
 library(dplyr)
 library(tidyr)
 library(stringr)
@@ -22,7 +29,6 @@ library(readr)
 
 # Charge les données
 
-df <- vessel.total.clean
 df <- Dossier.de.données.Big.Data.Nantes
 # Liste des valeurs à convertir en NA
 valeurs_na <- c("", "NA", "\\N", "na", "n")
@@ -86,4 +92,21 @@ sum <- summary(vessel.total.clean)
 summary_df <- data.frame(valeur = sum)
 write_csv(summary_df, "summary.csv")
 
+<<<<<<< HEAD
+=======
+# Crée les histogrammes
+hist(df$sog,
+     main = "Histogramme des vitesses des bateaux",
+     xlab = "Vitesse (sog)",
+     col = "skyblue",
+     border = "white",
+     breaks = 50)
+hist(df$vessel_type,
+     main = "Graphique des bateaux en fonction de leurs types",
+     xlab = "Type des bateaux (vessel_type)",
+     col = "skyblue",
+     border = 'white',
+     breaks = 50)
+
+>>>>>>> b5d5542b2d6f621ac56d0cb5abc032720f7c67f1
 
