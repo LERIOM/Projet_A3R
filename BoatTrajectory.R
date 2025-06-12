@@ -4,9 +4,13 @@ library(ggplot2)
 library(rnaturalearth)
 library(rnaturalearthdata)
 
-# 1) Lecture brute et filtrage sur MMSI = 67895
-df <- read.csv("vessel-total-clean-final.csv", stringsAsFactors = FALSE) %>%
-  filter(mmsi == 636022111)    # ou, si vos noms de colonnes sont passés en minuscules : filter(mmsi == 67895)
+idm <- "248392000" # MMSI du bateau
+
+# 1) Lecture brute et filtrage sur MMSI
+
+df <- read.csv("vessel-total-clean-final.csv", stringsAsFactors = FALSE) %>% 
+  filter(mmsi == idm)
+cat("Nombre de points après filtrage :", nrow(df), "\n")
 
 # 2) Conversion en sf
 pts <- st_as_sf(df, coords = c("lon","lat"), crs = 4326)
@@ -22,23 +26,44 @@ golfe_bbox <- st_as_sfc(
           crs = st_crs(4326))
 )
 
-# 4) Crop
-pts_golfe  <- st_crop(pts, golfe_bbox)
-coast      <- ne_coastline(scale = "medium", returnclass = "sf")
-coast_golfe<- st_crop(coast, golfe_bbox)
+# 4) Crop des données
+pts_golfe   <- st_crop(pts,        golfe_bbox)
+coast       <- ne_coastline(scale = "medium", returnclass = "sf")
+coast_golfe <- st_crop(coast,      golfe_bbox)
+land        <- ne_countries(scale = "medium", returnclass = "sf")
+land_golfe  <- st_crop(land,       golfe_bbox)
 
-# 5) (Optionnel) Diagnostics
-cat("Total points (MMSI 67895) :", nrow(df),      "\n")
+# 5) Diagnostics
+cat("Total points (MMSI", id,") :", nrow(df),      "\n")
 cat("Points dans le bbox       :", nrow(pts_golfe), "\n")
 
-# 6) Tracé simple pour vérifier le cadre
+# 6) Tracé final avec style appliqué
 ggplot() +
-  geom_sf(data = coast_golfe, fill = "grey30", color = "grey60") +
-  geom_sf(data = pts_golfe,  colour = "red",    size  = 0.8) +
+  #  Terre remplie en #E5E5E5
+  geom_sf(
+    data  = land_golfe,
+    fill  = "#E5E5E5",
+    color = NA
+  ) +
+  #  Ligne de côte légère
+  geom_sf(
+    data  = coast_golfe,
+    fill  = NA,
+    color = "grey60",
+    size  = 0.3
+  ) +
+  #  Points du bateau
+  geom_sf(
+    data  = pts_golfe,
+    color = "red",
+    size  = 0.7
+  ) +
   coord_sf(
     xlim   = c(xmin0 - marge, xmax0 + marge),
     ylim   = c(ymin0 - marge, ymax0 + marge),
     expand = FALSE
   ) +
   theme_void() +
-  theme(panel.background = element_rect(fill = "lightblue"))
+  theme(
+    legend.position  = "none"
+  )
