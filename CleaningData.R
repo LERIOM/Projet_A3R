@@ -1,4 +1,4 @@
-vessel.total.clean<-read.csv("DossierdedonnéesBigDataNantes.csv") 
+file<-read.csv("DossierdedonnéesBigDataNantes.csv") 
 
 
 summary(file)
@@ -11,7 +11,6 @@ install.packages("dplyr")
 install.packages("tidyr")
 install.packages("stringr")
 install.packages("janitor")
-install.packages("corrplot")
 
 library(nnet)
 library(corrplot)
@@ -24,6 +23,7 @@ library(readr)
 # Charge les données
 
 df <- vessel.total.clean
+df <- Dossier.de.données.Big.Data.Nantes
 # Liste des valeurs à convertir en NA
 valeurs_na <- c("", "NA", "\\N", "na", "n")
 
