@@ -51,7 +51,7 @@ world <- rnaturalearth::ne_countries(scale="medium", returnclass="sf")
 ggplot() +
   geom_sf(data = world, fill = "grey90", color = "grey50") +
   geom_sf(data = pts_m, aes(color = factor(cluster)), size = 0.3, alpha = 0.3) +
-  geom_sf(data = ports_wgs84, color = "red", size = 2) +
+  geom_sf(data = ports_wgs84, color = "red", size = 3) +
   coord_sf(xlim = c(-100, -75), ylim = c(18, 32), expand = FALSE) +
   scale_color_viridis_d(option = "turbo", guide = "none") +
   theme_minimal()+

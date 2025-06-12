@@ -1,9 +1,3 @@
-install.packages("scales")
-install.packages("ggplot2")
-install.packages("sf")
-install.packages("rnaturalearth")
-install.packages("viridis")
-install.packages("dplyr")
 library(ggplot2)
 library(sf)
 library(rnaturalearth)
@@ -33,19 +27,44 @@ pts_golfe  <- st_crop(pts, golfe_bbox)
 coast      <- ne_coastline(scale = "medium", returnclass = "sf")
 coast_golfe<- st_crop(coast, golfe_bbox)
 
-# 5) (Optionnel) Diagnostics
-cat("Total points      :", nrow(df),      "\n")
-cat("Points gardés     :", nrow(pts_golfe), "\n")
+land <- ne_countries(scale = "medium", returnclass = "sf")
 
-# 6) Tracé simple pour vérifier le cadre
+# 2) Rogner sur votre bbox
+land_golfe <- st_crop(land, golfe_bbox)
+
+# 3) Tracé avec terre remplie
 ggplot() +
-  geom_sf(data = coast_golfe, fill = "grey30", color = "grey60") +
-  geom_sf(data = pts_golfe,  colour = "red",    size  = 0.5) +
+  # la « terre » en (229,229,229)
+  geom_sf(
+    data  = land_golfe,
+    fill  = "#E5E5E5",         # équivalent hex de rgb(229,229,229)
+    color = NA                 # pas de bordure pour le polygone
+  ) +
+  # la côte (facultatif, pour un contour léger)
+  geom_sf(
+    data  = coast_golfe,
+    fill  = NA,
+    color = "grey60",
+    size  = 0.3
+  ) +
+  # vos points colorés par MMSI
+  geom_sf(
+    data    = pts_golfe,
+    mapping = aes(color = factor(vessel_type)),
+    size    = 0.5
+  ) +
+  scale_color_viridis_d(direction = 1) +
   coord_sf(
     xlim   = c(xmin0 - marge, xmax0 + marge),
     ylim   = c(ymin0 - marge, ymax0 + marge),
     expand = FALSE
   ) +
   theme_void() +
-  theme(panel.background = element_rect(fill = "lightblue"))
-
+  theme(
+    legend.position  = "right"
+  )+
+  guides(
+    color = guide_legend(
+      override.aes = list(size = 4)  # ici on grossit les points dans la légende
+    )
+  )
